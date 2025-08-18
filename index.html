@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chá de Revelação</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff3f8, #e6f7ff);
+    color: #444;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+  }
+
+  h1 {
+    color: #e91e63;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .counter {
+    font-size: 1.5rem;
+    color: #1976d2;
+    margin: 15px 0;
+  }
+
+  .details {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  .form-group {
+    margin: 20px 0;
+    text-align: left;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  button:hover {
+    background: #128C7E;
+    transform: scale(1.03);
+  }
+
+  .guest-list {
+    margin-top: 30px;
+    text-align: left;
+    border-top: 2px dashed #ff8aac;
+    padding-top: 20px;
+  }
+
+  .guest-item {
+    padding: 12px;
+    background: #fdeff2;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .guest-item strong {
+    color: #c2185b;
+  }
+
+  .success {
+    display: none;
+    padding: 20px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+</style>
+<script src="https://kit.fontawesome.com/a2a0b8f8e3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Chá de Revelação</h1>
+    <p>Com amor, <strong>[Mamãe e Papai]</strong> convidam você!</p>
+
+    <div class="details">
+      <p><strong>📅 Data:</strong> 15 de Junho de 2025</p>
+      <p><strong>⏰ Horário:</strong> 16h</p>
+      <p><strong>📍 Local:</strong> Salão Alegria, Rua das Flores, 123</p>
+    </div>
+
+    <!-- Formulário de Confirmação -->
+    <div id="formSection">
+      <p>Confirme sua presença:</p>
+
+      <div class="form-group">
+        <label for="nome">Seu nome completo *</label>
+        <input type="text" id="nome" placeholder="Ex: Ana Silva" required />
+      </div>
+
+      <div class="form-group">
+        <label for="acompanhantes">Quem vai com você?</label>
+        <textarea id="acompanhantes" placeholder="Ex: meu marido João e minha filha Laura"></textarea>
+      </div>
+
+      <button id="enviarBtn">
+        <i class="fas fa-check"></i> Confirmar Presença
+      </button>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div class="success" id="sucesso">
+      <p><strong>🎉 Obrigado(a), <span id="nomeMostrado"></span>!</strong></p>
+      <p>Sua presença foi confirmada com sucesso! Mal podemos esperar por você! ❤️</p>
+    </div>
+
+    <!-- Contador e Lista de Confirmados -->
+    <div class="guest-list">
+      <h3>👥 Convidados Confirmados (<span id="total">0</span>)</h3>
+      <div id="listaConvidados">
+        <!-- Os convidados aparecerão aqui -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Chave para armazenar os dados
+    const KEY = "confirmacoes_cha_revelacao";
+
+    // Carrega os convidados salvos
+    function carregarConvidados() {
+      const saved = localStorage.getItem(KEY);
+      return saved ? JSON.parse(saved) : [];
+    }
+
+    // Salva um novo convidado
+    function salvarConvidado(nome, acompanhantes) {
+      const lista = carregarConvidados();
+      lista.push({ nome, acompanhantes, data: new Date().toLocaleDateString() });
+      localStorage.setItem(KEY, JSON.stringify(lista));
+    }
+
+    // Atualiza a lista na tela
+    function atualizarLista() {
+      const lista = carregarConvidados();
+      const container = document.getElementById("listaConvidados");
+      const total = document.getElementById("total");
+      
+      container.innerHTML = "";
+
+      if (lista.length === 0) {
+        container.innerHTML = "<p><em>Nenhuma confirmação ainda. Seja o primeiro! ❤️</em></p>";
+      } else {
+        lista.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "guest-item";
+          div.innerHTML = `
+            <strong>${item.nome}</strong><br>
+            <small>Confirmação: ${item.acompanhantes || 'Apenas eu'}</small>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      total.textContent = lista.length;
+    }
+
+    // Inicializa
+    atualizarLista();
+
+    // Evento de confirmação
+    document.getElementById("enviarBtn").addEventListener("click", function () {
+      const nome = document.getElementById("nome").value.trim();
+      const acompanhantes = document.getElementById("acompanhantes").value.trim() || "Apenas eu";
+
+      if (!nome) {
+        alert("Por favor, digite seu nome completo.");
+        return;
+      }
+
+      // Salva no site
+      salvarConvidado(nome, acompanhantes);
+
+      // Atualiza a lista
+      atualizarLista();
+
+      // Mostra mensagem de sucesso
+      document.getElementById("nomeMostrado").textContent = nome;
+      document.getElementById("formSection").style.display = "none";
+      document.getElementById("sucesso").style.display = "block";
+    });
+  </script>
+</body>
+</html>
