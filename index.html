@@ -3,130 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chá de Revelação</title>
+  <title>Chá de Revelação - Confirmações</title>
   <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #fff3f8, #e6f7ff);
-    color: #444;
-    min-height: 100vh;
-    padding: 20px;
-  }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #fff3fb, #e3f7ff);
+      color: #444;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
-  }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
 
-  h1 {
-    color: #e91e63;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-  }
+    header {
+      background: #e91e63;
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
 
-  .counter {
-    font-size: 1.5rem;
-    color: #1976d2;
-    margin: 15px 0;
-  }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-  .details {
-    background: #f9f9f9;
-    border-radius: 12px;
-    padding: 15px;
-    margin: 20px 0;
-    font-size: 0.95rem;
-    text-align: left;
-  }
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
 
-  .form-group {
-    margin: 20px 0;
-    text-align: left;
-  }
+    .details {
+      background: #fdf2f7;
+      padding: 20px;
+      border-bottom: 1px dashed #ffb6c1;
+      font-size: 0.95rem;
+      text-align: left;
+    }
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-  }
+    .details p {
+      margin: 6px 0;
+    }
 
-  input, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
+    .form-section {
+      padding: 30px;
+      background: #f9f9f9;
+    }
 
-  button {
-    margin-top: 15px;
-    padding: 12px 20px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
+    .form-group {
+      margin: 15px 0;
+      text-align: left;
+    }
 
-  button:hover {
-    background: #128C7E;
-    transform: scale(1.03);
-  }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #c2185b;
+    }
 
-  .guest-list {
-    margin-top: 30px;
-    text-align: left;
-    border-top: 2px dashed #ff8aac;
-    padding-top: 20px;
-  }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ffb6c1;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
 
-  .guest-item {
-    padding: 12px;
-    background: #fdeff2;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
+    button {
+      margin-top: 20px;
+      padding: 14px 25px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
 
-  .guest-item strong {
-    color: #c2185b;
-  }
+    button:hover {
+      background: #128C7E;
+      transform: scale(1.05);
+    }
 
-  .success {
-    display: none;
-    padding: 20px;
-    background: #e8f5e9;
-    color: #2e7d32;
-    border-radius: 12px;
-    margin-top: 20px;
-  }
-</style>
-<script src="https://kit.fontawesome.com/a2a0b8f8e3.js" crossorigin="anonymous"></script>
+    .guest-list {
+      padding: 30px;
+      background: #f8f9fa;
+    }
+
+    .guest-list h3 {
+      color: #c2185b;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .guest-item {
+      padding: 16px;
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border-left: 5px solid #e91e63;
+    }
+
+    .guest-item strong {
+      color: #c2185b;
+      font-size: 1.1rem;
+    }
+
+    .loading {
+      text-align: center;
+      color: #888;
+      font-style: italic;
+      padding: 20px;
+    }
+
+    .success {
+      display: none;
+      padding: 20px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 1.1rem;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>🎉 Chá de Revelação</h1>
-    <p>Com amor, <strong>[Mamãe e Papai]</strong> convidam você!</p>
+    <header>
+      <h1>🎉 Chá de Revelação</h1>
+      <p class="subtitle">Vamos descobrir se vem menino ou menina!</p>
+    </header>
 
     <div class="details">
       <p><strong>📅 Data:</strong> 15 de Junho de 2025</p>
@@ -135,8 +163,8 @@
     </div>
 
     <!-- Formulário de Confirmação -->
-    <div id="formSection">
-      <p>Confirme sua presença:</p>
+    <div class="form-section" id="formSection">
+      <p style="font-weight: bold; color: #c2185b; margin-bottom: 15px;">Confirme sua presença:</p>
 
       <div class="form-group">
         <label for="nome">Seu nome completo *</label>
@@ -149,91 +177,119 @@
       </div>
 
       <button id="enviarBtn">
-        <i class="fas fa-check"></i> Confirmar Presença
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M10.97 4.61c-.27.27-.7.27-.98 0L7 1.63l-2.97 2.98c-.27.27-.7.27-.98 0-.27-.27-.27-.7 0-.98l3.47-3.47a1 1 0 0 1 1.41 0l3.47 3.47c.28.28.28.71 0 .98-.27.27-.7.27-.98 0z"/>
+          <path d="m8 4.41-.97-.98c-.27-.27-.7-.27-.98 0-.27.27-.27.7 0 .98L7 5.39l.98-.98c.27-.27.7-.27.98 0 .27.27.27.7 0 .98l-.98.98.98.98c.27.27.27.7 0 .98-.27.27-.7.27-.98 0l-.98-.98-.98.98c-.27.27-.7.27-.98 0-.27-.27-.27-.7 0-.98l.98-.98-.98-.98c-.27-.27-.27-.7 0-.98.27-.27.7-.27.98 0l.98.98L8 4.41z"/>
+          <path d="M7 14.37l2.97-2.98c.27-.27.7-.27.98 0 .27.27.27.7 0 .98l-3.47 3.47a1 1 0 0 1-1.41 0l-3.47-3.47c-.27-.27-.27-.7 0-.98.27-.27.7-.27.98 0L7 14.37z"/>
+        </svg>
+        Confirmar Presença
       </button>
+      <p id="status" style="margin-top: 10px; font-size: 0.9rem; color: #d32f2f;"></p>
     </div>
 
     <!-- Mensagem de sucesso -->
     <div class="success" id="sucesso">
       <p><strong>🎉 Obrigado(a), <span id="nomeMostrado"></span>!</strong></p>
-      <p>Sua presença foi confirmada com sucesso! Mal podemos esperar por você! ❤️</p>
+      <p>Sua presença é um presente! Mal podemos esperar por você! ❤️</p>
     </div>
 
-    <!-- Contador e Lista de Confirmados -->
+    <!-- Lista Pública de Confirmados -->
     <div class="guest-list">
-      <h3>👥 Convidados Confirmados (<span id="total">0</span>)</h3>
+      <h3>💖 Amigos que já confirmaram (<span id="total">0</span>)</h3>
       <div id="listaConvidados">
-        <!-- Os convidados aparecerão aqui -->
+        <p class="loading">Carregando amigos especiais...</p>
       </div>
     </div>
   </div>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
   <script>
-    // Chave para armazenar os dados
-    const KEY = "confirmacoes_cha_revelacao";
+    // 🔥 FIREBASE CONFIG - Substitua com suas credenciais
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6y6m3EbvWDJTewD9KjBRuvevhoi8___Q",
+      authDomain: "cha-revelacao-702ae.firebaseapp.com",
+      databaseURL: "https://cha-revelacao-702ae-default-rtdb.firebaseio.com",
+      projectId: "cha-revelacao-702ae",
+      storageBucket: "cha-revelacao-702ae.firebasestorage.app",
+      messagingSenderId: "715921788413",
+      appId: "1:715921788413:web:1e0a1b83e11a775e4f5d94"
+    };
 
-    // Carrega os convidados salvos
-    function carregarConvidados() {
-      const saved = localStorage.getItem(KEY);
-      return saved ? JSON.parse(saved) : [];
-    }
+    // Inicializa o Firebase
+    try {
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+      const confirmacoesRef = db.ref("confirmacoes");
 
-    // Salva um novo convidado
-    function salvarConvidado(nome, acompanhantes) {
-      const lista = carregarConvidados();
-      lista.push({ nome, acompanhantes, data: new Date().toLocaleDateString() });
-      localStorage.setItem(KEY, JSON.stringify(lista));
-    }
-
-    // Atualiza a lista na tela
-    function atualizarLista() {
-      const lista = carregarConvidados();
-      const container = document.getElementById("listaConvidados");
+      const status = document.getElementById("status");
+      const lista = document.getElementById("listaConvidados");
       const total = document.getElementById("total");
-      
-      container.innerHTML = "";
 
-      if (lista.length === 0) {
-        container.innerHTML = "<p><em>Nenhuma confirmação ainda. Seja o primeiro! ❤️</em></p>";
-      } else {
-        lista.forEach(item => {
-          const div = document.createElement("div");
-          div.className = "guest-item";
-          div.innerHTML = `
-            <strong>${item.nome}</strong><br>
-            <small>Confirmação: ${item.acompanhantes || 'Apenas eu'}</small>
-          `;
-          container.appendChild(div);
+      // 🔥 TEMPO REAL: escuta mudanças automaticamente
+      confirmacoesRef.on("value", (snapshot) => {
+        const data = snapshot.val();
+        lista.innerHTML = "";
+        let count = 0;
+
+        if (data) {
+          // Mostra do mais novo para o mais antigo
+          Object.keys(data).reverse().forEach(key => {
+            const item = data[key];
+            const div = document.createElement("div");
+            div.className = "guest-item";
+            div.innerHTML = `
+              <strong>${item.nome}</strong>
+              <div style="font-size:0.9rem; color:#666; margin-top:4px;">
+                Levará: ${item.acompanhantes || 'Apenas eu'}
+              </div>
+            `;
+            lista.appendChild(div);
+            count++;
+          });
+        } else {
+          lista.innerHTML = "<p style='text-align:center; color:#888;'>Ninguém confirmou ainda. Seja o primeiro! 💕</p>";
+        }
+        total.textContent = count;
+      }, (error) => {
+        lista.innerHTML = `<p style="color:red; text-align:center;">❌ Erro ao carregar: ${error.message}</p>`;
+      });
+
+      // ✅ Enviar nova confirmação
+      document.getElementById("enviarBtn").addEventListener("click", () => {
+        const nome = document.getElementById("nome").value.trim();
+        const acompanhantes = document.getElementById("acompanhantes").value.trim() || "Apenas eu";
+
+        if (!nome) {
+          status.textContent = "⚠️ Por favor, digite seu nome completo.";
+          return;
+        }
+
+        // 🔥 Salva no Firebase (visível para todos)
+        confirmacoesRef.push({
+          nome: nome,
+          acompanhantes: acompanhantes,
+          timestamp: Date.now()
+        })
+        .then(() => {
+          // Sucesso
+          document.getElementById("nomeMostrado").textContent = nome;
+          document.getElementById("formSection").style.display = "none";
+          document.getElementById("sucesso").style.display = "block";
+          status.textContent = "";
+        })
+        .catch((error) => {
+          status.textContent = "❌ Erro ao salvar: " + error.message;
         });
-      }
+      });
 
-      total.textContent = lista.length;
+    } catch (error) {
+      document.getElementById("status").textContent = "❌ Erro no Firebase: " + error.message;
+      document.getElementById("status").style.color = "red";
     }
-
-    // Inicializa
-    atualizarLista();
-
-    // Evento de confirmação
-    document.getElementById("enviarBtn").addEventListener("click", function () {
-      const nome = document.getElementById("nome").value.trim();
-      const acompanhantes = document.getElementById("acompanhantes").value.trim() || "Apenas eu";
-
-      if (!nome) {
-        alert("Por favor, digite seu nome completo.");
-        return;
-      }
-
-      // Salva no site
-      salvarConvidado(nome, acompanhantes);
-
-      // Atualiza a lista
-      atualizarLista();
-
-      // Mostra mensagem de sucesso
-      document.getElementById("nomeMostrado").textContent = nome;
-      document.getElementById("formSection").style.display = "none";
-      document.getElementById("sucesso").style.display = "block";
-    });
   </script>
 </body>
 </html>
