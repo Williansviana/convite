@@ -198,14 +198,13 @@
     <header>
       <h1>🎉 Chá de Revelação</h1>
       <p class="subtitle">Venha comemorar conosco: será Isabella ou Gabriel?</p>
-      <p>Trazer quem beber: Refrigerente ou Cerveja</p>
-      <p>Fraldas</p>
+      <p><strong>🎁 Ajuda com festa:</strong> Fraldas e quem beber, trazer refrigerante ou cerveja</p>
     </header>
 
     <div class="details">
       <p><strong>📅 Data:</strong> 27 de Setembro de 2025</p>
       <p><strong>⏰ Horário:</strong> 13h</p>
-      <p><strong>📍 Local:</strong> Chácara Viana</p>
+      <p><strong>📍 Local:</strong> Chácara Viana - Alto da Serra de São Pedro</p>
     </div>
 
     <!-- Formulário de Confirmação -->
@@ -248,147 +247,152 @@
     </div>
   </div>
 
-  <!-- Firebase SDK -->
+  <!-- ✅ Firebase SDK - URLs corrigidas (sem espaços!) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
   <script>
-    // 🔥 CONFIGURE AQUI SUAS CREDENCIAIS DO FIREBASE
+    // 🔥 Configuração do Firebase (corrigida)
     const firebaseConfig = {
       apiKey: "AIzaSyB6y6m3EbvWDJTewD9KjBRuvevhoi8___Q",
       authDomain: "cha-revelacao-702ae.firebaseapp.com",
-      databaseURL: "https://cha-revelacao-702ae-default-rtdb.firebaseio.com",
+      databaseURL: "https://cha-revelacao-702ae-default-rtdb.firebaseio.com", // ✅ Sem espaços
       projectId: "cha-revelacao-702ae",
       storageBucket: "cha-revelacao-702ae.firebasestorage.app",
       messagingSenderId: "715921788413",
       appId: "1:715921788413:web:1e0a1b83e11a775e4f5d94"
     };
 
-    // Inicializa Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const ref = db.ref("confirmacoes");
+    // Inicializa o Firebase
+    try {
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+      const ref = db.ref("confirmacoes");
 
-    // Elementos
-    const status = document.getElementById("status");
-    const lista = document.getElementById("listaConvidados");
-    const total = document.getElementById("total");
-    const formSection = document.getElementById("formSection");
-    const sucesso = document.getElementById("sucesso");
-    const enviarBtn = document.getElementById("enviarBtn");
-    const nomeInput = document.getElementById("nome");
-    const acompanhantesInput = document.getElementById("acompanhantes");
+      const status = document.getElementById("status");
+      const lista = document.getElementById("listaConvidados");
+      const total = document.getElementById("total");
+      const formSection = document.getElementById("formSection");
+      const sucesso = document.getElementById("sucesso");
+      const enviarBtn = document.getElementById("enviarBtn");
+      const nomeInput = document.getElementById("nome");
+      const acompanhantesInput = document.getElementById("acompanhantes");
 
-    let editandoId = null;
+      let editandoId = null;
 
-    // 🔥 Carregar confirmações em tempo real
-    ref.on("value", (snapshot) => {
-      const data = snapshot.val();
-      lista.innerHTML = "";
-      let count = 0;
+      // 🔥 Escuta mudanças em tempo real
+      ref.on("value", (snapshot) => {
+        const data = snapshot.val();
+        lista.innerHTML = "";
+        let count = 0;
 
-      if (data) {
-        Object.keys(data).reverse().forEach(key => {
-          const item = data[key];
-          const div = document.createElement("div");
-          div.className = "guest-item";
-          div.innerHTML = `
-            <strong>${item.nome}</strong>
-            <div style="font-size:0.9rem; color:#666; margin-top:4px;">
-              Levará: ${item.acompanhantes || 'Apenas eu'}
-            </div>
-            <button class="edit-btn" data-id="${key}" data-nome="${item.nome}" data-acompanhantes="${item.acompanhantes || ''}" title="Editar">✏️</button>
-          `;
-          lista.appendChild(div);
-          count++;
-        });
-
-        // Adiciona evento de edição
-        document.querySelectorAll(".edit-btn").forEach(btn => {
-          btn.addEventListener("click", function () {
-            const id = this.getAttribute("data-id");
-            const nome = this.getAttribute("data-nome");
-            const acompanhantes = this.getAttribute("data-acompanhantes");
-
-            nomeInput.value = nome;
-            acompanhantesInput.value = acompanhantes;
-            editandoId = id;
-
-            enviarBtn.innerHTML = "💾 Salvar Edição";
-            status.textContent = ">Editando sua confirmação...";
-            status.style.color = "#1976d2";
+        if (data) {
+          Object.keys(data).reverse().forEach(key => {
+            const item = data[key];
+            const div = document.createElement("div");
+            div.className = "guest-item";
+            div.innerHTML = `
+              <strong>${item.nome}</strong>
+              <div style="font-size:0.9rem; color:#666; margin-top:4px;">
+                Levará: ${item.acompanhantes || 'Apenas eu'}
+              </div>
+              <button class="edit-btn" data-id="${key}" data-nome="${item.nome}" data-acompanhantes="${item.acompanhantes || ''}" title="Editar">✏️</button>
+            `;
+            lista.appendChild(div);
+            count++;
           });
-        });
-      } else {
-        lista.innerHTML = "<p class='loading'>Ninguém confirmou ainda. Seja o primeiro! 💕</p>";
-      }
-      total.textContent = count;
-    }, (err) => {
-      lista.innerHTML = `<p style="color:red; text-align:center;">❌ Erro: ${err.message}</p>`;
-    });
 
-    // ✅ Confirmar ou Editar
-    enviarBtn.addEventListener("click", () => {
-      const nome = nomeInput.value.trim();
-      const acompanhantes = acompanhantesInput.value.trim() || "Apenas eu";
+          // Adiciona evento de edição
+          document.querySelectorAll(".edit-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+              const id = this.getAttribute("data-id");
+              const nome = this.getAttribute("data-nome");
+              const acompanhantes = this.getAttribute("data-acompanhantes");
 
-      if (!nome) {
-        status.textContent = "⚠️ Por favor, digite seu nome.";
-        return;
-      }
+              nomeInput.value = nome;
+              acompanhantesInput.value = acompanhantes;
+              editandoId = id;
 
-      if (editandoId) {
-        // Atualizar
-        ref.child(editandoId).update({ nome, acompanhantes })
-          .then(() => {
-            resetForm();
-            status.innerHTML = "✅ Edição salva com sucesso!";
-            status.style.color = "green";
-          })
-          .catch(err => {
-            status.innerHTML = "❌ Erro ao editar: " + err.message;
+              enviarBtn.innerHTML = "💾 Salvar Edição";
+              status.textContent = "> Editando sua confirmação...";
+              status.style.color = "#1976d2";
+            });
           });
-      } else {
-        // Nova confirmação
-        ref.push({ nome, acompanhantes, timestamp: Date.now() })
-          .then(() => {
-            resetForm();
-            status.innerHTML = "";
-          })
-          .catch(err => {
-            status.innerHTML = "❌ Erro ao salvar: " + err.message;
-          });
-      }
-    });
+        } else {
+          lista.innerHTML = "<p class='loading'>Ninguém confirmou ainda. Seja o primeiro! 💕</p>";
+        }
+        total.textContent = count;
+      }, (error) => {
+        lista.innerHTML = `<p style="color:red; text-align:center;">❌ Erro ao carregar: ${error.message}</p>`;
+      });
 
-    // 🔐 Botão de limpar tudo com senha
-    document.getElementById("limparBtn").addEventListener("click", () => {
-      const senha = prompt("🔒 Digite a senha para limpar todas as confirmações:");
-      
-      // 🔁 Mude a senha abaixo para algo pessoal
-      if (senha === "251125") {
-        if (confirm("⚠️ Tem certeza que deseja apagar TODAS as confirmações? Esta ação não pode ser desfeita.")) {
-          ref.remove()
+      // ✅ Enviar nova confirmação
+      enviarBtn.addEventListener("click", () => {
+        const nome = nomeInput.value.trim();
+        const acompanhantes = acompanhantesInput.value.trim() || "Apenas eu";
+
+        if (!nome) {
+          status.textContent = "⚠️ Por favor, digite seu nome.";
+          return;
+        }
+
+        if (editandoId) {
+          // Atualizar
+          ref.child(editandoId).update({ nome, acompanhantes })
             .then(() => {
-              alert("✅ Tudo limpo com sucesso!");
+              resetForm();
+              status.innerHTML = "✅ Edição salva com sucesso!";
+              status.style.color = "green";
             })
             .catch(err => {
-              alert("❌ Erro ao limpar: " + err.message);
+              status.innerHTML = "❌ Erro ao editar: " + err.message;
+            });
+        } else {
+          // Nova confirmação
+          ref.push({ nome, acompanhantes, timestamp: Date.now() })
+            .then(() => {
+              resetForm();
+              status.innerHTML = "";
+            })
+            .catch(err => {
+              status.innerHTML = "❌ Erro ao salvar: " + err.message;
             });
         }
-      } else if (senha !== null) {
-        alert("❌ Senha incorreta!");
-      }
-    });
+      });
 
-    // Função para resetar o formulário
-    function resetForm() {
-      nomeInput.value = "";
-      acompanhantesInput.value = "";
-      editandoId = null;
-      enviarBtn.innerHTML = "✅ Confirmar Presença";
-      formSection.style.display = "block";
-      sucesso.style.display = "none";
+      // 🔐 Botão de limpar tudo com senha
+      document.getElementById("limparBtn").addEventListener("click", () => {
+        const senha = prompt("🔒 Digite a senha para limpar todas as confirmações:");
+        
+        if (senha === "251125") {
+          if (confirm("⚠️ Tem certeza que deseja apagar TODAS as confirmações?")) {
+            ref.remove()
+              .then(() => {
+                alert("✅ Tudo limpo com sucesso!");
+              })
+              .catch(err => {
+                alert("❌ Erro ao limpar: " + err.message);
+              });
+          }
+        } else if (senha !== null) {
+          alert("❌ Senha incorreta!");
+        }
+      });
+
+      // Função para resetar o formulário
+      function resetForm() {
+        nomeInput.value = "";
+        acompanhantesInput.value = "";
+        editandoId = null;
+        enviarBtn.innerHTML = "✅ Confirmar Presença";
+        formSection.style.display = "block";
+        sucesso.style.display = "none";
+      }
+
+    } catch (error) {
+      console.error("❌ Erro ao inicializar Firebase:", error);
+      document.getElementById("status").textContent = "❌ Erro no Firebase: " + error.message;
+      document.getElementById("status").style.color = "red";
     }
   </script>
 </body>
